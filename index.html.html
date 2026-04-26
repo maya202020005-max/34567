@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الاستهلاك المسؤول - عرض تقديمي تفاعلي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Tajawal', sans-serif; }
+        
+        body {
+            overflow: hidden;
+            background: #0a0a0a;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            display: none;
+      …
+         } <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الاستهلاك المسؤول - عرض تقديمي</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* خلفية متحركة */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .bg-animation span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(34, 197, 94, 0.2);
+            animation: move 25s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+        }
+
+        .bg-animation span:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .bg-animation span:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .bg-animation span:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .bg-animation span:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+        .bg-animation span:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .bg-animation span:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+        .bg-animation span:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+        .bg-animation span:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .bg-animation span:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+        .bg-animation span:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+        @keyframes move {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+        }
+
+        /* الشرائح */
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* عنوان رئيسي */
+        h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #22c55e, #10b981, #14b8a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #22c55e;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* أزرار التنقل - CSS فقط */
+        .nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(34, 197, 94, 0.5);
+            color: #22c55e;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: rgba(34, 197, 94, 0.3);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+        }
+
+        .nav-btn.prev { left: 30px; }
+        .nav-btn.next { right: 30px; }
+
+        /* شريط التقدم */
+        .progress-bar {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .progress-dot.active {
+            background: #22c55e;
+            width: 40px;
+            border-radius: 6px;
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(34, 197, 94, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            font-weight: bold;
+            color: #22c55e;
+            z-index: 1000;
+        }
+
+        /* محتوى الشرائح */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.5);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #22c55e;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* قائمة */
+        .feature-list {
+            list-style: none;
+            width: 100%;
+        }
+
+        .feature-list li {
+            padding: 20px;
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-right: 4px solid #22c55e;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-list li:hover {
+            background: rgba(34, 197, 94, 0.1);
+            transform: translateX(-10px);
+        }
+
+        .feature-list .icon {
+            font-size: 2rem;
+        }
+
+        /* إحصائيات */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #22c55e;
+            display: block;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+
+        /* دائرة تقدم */
+        .circle-chart {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 10;
+        }
+
+        .circle-progress {
+            fill: none;
+            stroke: #22c55e;
+            stroke-width: 10;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+            transition: stroke-dashoffset 1s ease;
+        }
+
+        .circle-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #22c55e;
+        }
+
+        /* مؤثرات خاصة */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* نص كبير */
+        .big-text {
+            font-size: 1.5rem;
+            line-height: 2;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .highlight {
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        /* شريحة العنوان */
+        .title-slide h1 {
+            font-size: 6rem;
+            margin-bottom: 20px;
+        }
+
+        .title-slide .subtitle {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 10px 25px;
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            border-radius: 30px;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* استجابة للشاشات الصغيرة */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .slide { padding: 30px; }
+            .nav-btn { width: 45px; height: 45px; font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- خلفية متحركة -->
+    <div class="bg-animation">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <!-- رقم الشريحة -->
+    <div class="slide-number">
+        <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+    </div>
+
+    <!-- أزرار التنقل -->
+    <button class="nav-btn prev" onclick="changeSlide(-1)" title="السابق">‹</button>
+    <button class="nav-btn next" onclick="changeSlide(1)" title="التالي">›</button>
+
+    <!-- شريط التقدم -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- الشرائح -->
+    <div class="container">
+        
+        <!-- الشريحة 1: العنوان -->
+        <div class="slide active title-slide">
+            <div class="content">
+                <div class="float" style="font-size: 5rem; margin-bottom: 20px;">🌱</div>
+                <h1>الاستهلاك المسؤول</h1>
+                <p class="subtitle">كيف يمكن تطبيقه في حياتنا اليومية؟</p>
+                <div style="margin-top: 30px;">
+                    <span class="badge">مشروع تخرج 1447هـ</span>
+                    <span class="badge">الثانوية الأولى بالنرجس</span>
+                </div>
+                <p style="margin-top: 30px; color: rgba(255,255,255,0.6);">
+                    إعداد: لمى المطيري، ريتاج العمري، جوري القحطاني، ندى العتمي
+                </p>
+            </div>
+        </div>
+
+        <!-- الشريحة 2: المقدمة -->
+        <div class="slide">
+            <h2>لماذا الاستهلاك المسؤول؟ 🤔</h2>
+            <div class="content">
+                <div class="grid-2">
+                    <div class="feature-list">
+                        <li>
+                            <span class="icon">🌍</span>
+                            <span>في ظل التحديات البيئية والاجتماعية، أصبح الاستهلاك المسؤول من أهم المفاهيم</span>
+                        </li>
+                        <li>
+                            <span class="icon">💡</span>
+                            <span>ليس مجرد شراء السلع، بل <span class="highlight">اتخاذ قرارات واعية</span> تعكس أثرنا</span>
+                        </li>
+                    </div>
+                    <div class="feature-list">
+                        <li>
+                            <span class="icon">👣</span>
+                            <span>كل منتج نستخدمه يترك <span class="highlight">بصمة تأثير</span> على البيئة والموارد</span>
+                        </li>
+                        <li>
+                            <span class="icon">⚖️</span>
+                            <span>في عالمنا اليوم، أصبح الاستهلاك المسؤول من الأمور المهمة التي تساعد في الحفاظ على الموارد وتقليل الهدر. فهو يعكس وعي الإنسان في طريقة استخدامه لما حوله بشكل متوازن ومستدام. ومن هذا المنطلق، يهدف مشروعنا إلى التعرف على مفهوم الاستهلاك المسؤول وكيف يمكن تطبيقه في حياتنا اليومية.</span>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 3: مشكلة البحث -->
+        <div class="slide">
+            <h2 style="color: #ef4444;">مشكلة البحث ⚠️</h2>
+            <div class="content">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-icon">📈</div>
+                        <h3>التوسع في الاستهلاك</h3>
+                        <p>ازدياد الاعتماد على الشراء المفرط واستخدام الموارد دون تخطيط</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🏭</div>
+                        <h3>المشكلات البيئية</h3>
+                        <p>استنزاف الموارد الطبيعية وزيادة النفايات وارتفاع التكاليف المعيشية</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">❓</div>
+                        <h3>ضعف الوعي</h3>
+                        <p>الممارسات الفعلية للاستهلاك المسؤول مازالت محدودة وغير واضحة</p>
+                    </div>
+                </div>
+                <div style="margin-top: 50px; padding: 30px; background: rgba(34, 197, 94, 0.1); border-radius: 20px; border: 2px solid rgba(34, 197, 94, 0.5);">
+                    <p style="font-size: 1.5rem; text-align: center; color: #22c55e; font-weight: bold;">
+                        ❓ السؤال الرئيسي: كيف يمكن تطبيق الاستهلاك المسؤول في حياتنا اليومية؟
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 4: الأهمية -->
+        <div class="slide">
+            <h2>أهمية البحث 🎯</h2>
+            <div class="content">
+                <div class="grid-3">
+                    <div class="card pulse">
+                        <div class="card-icon">💧</div>
+                        <h3>المحافظة على الموارد</h3>
+                        <p>ضمان استدامة المياه والطاقة والمعادن للأجيال القادمة</p>
+                    </div>
+                    <div class="card pulse" style="animation-delay: 0.2s;">
+                        <div class="card-icon">🌱</div>
+                        <h3>تقليل التلوث</h3>
+                        <p>حماية الهواء والمياه والتربة من الملوثات والنفايات</p>
+                    </div>
+                    <div class="card pulse" style="animation-delay: 0.4s;">
+                        <div class="card-icon">🌡️</div>
+                        <h3>الحد من التغير المناخي</h3>
+                        <p>خفض الانبعاثات الكربونية والغازات الدفيئة</p>
+                    </div>
+                    <div class="card pulse" style="animation-delay: 0.6s;">
+                        <div class="card-icon">❤️</div>
+                        <h3>تعزيز الصحة العامة</h3>
+                        <p>تقليل الأمراض المرتبطة بالتلوث البيئي</p>
+                    </div>
+                    <div class="card pulse" style="animation-delay: 0.8s;">
+                        <div class="card-icon">⚖️</div>
+                        <h3>العدالة الاجتماعية</h3>
+                        <p>تقليل الفجوة بين المجتمعات في توزيع الموارد</p>
+                    </div>
+                    <div class="card pulse" style="animation-delay: 1s;">
+                        <div class="card-icon">🎯</div>
+                        <h3>الهدف 12 للتنمية</h3>
+                        <p>الاستهلاك والإنتاج المسؤولين - أجندة 2030</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 5: المحاور -->
+        <div class="slide">
+            <h2>محاور البحث الرئيسية 📊</h2>
+            <div class="content">
+                <div class="grid-2" style="gap: 30px;">
+                    <div class="card" style="border-color: #22c55e; background: rgba(34, 197, 94, 0.1);">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">📚</div>
+                        <h3>المحور الأول: الإطار المفاهيمي</h3>
+                        <p>تعريف الاستهلاك المسؤول وأبعاده البيئية والاقتصادية والاجتماعية</p>
+                    </div>
+                    <div class="card" style="border-color: #3b82f6; background: rgba(59, 130, 246, 0.1);">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">📉</div>
+                        <h3>المحور الثاني: واقع أنماط الاستهلاك</h3>
+                        <p>الاستهلاك المعاصر وآثاره السلبية على البيئة والمجتمع</p>
+                    </div>
+                    <div class="card" style="border-color: #a855f7; background: rgba(168, 85, 247, 0.1);">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">⚖️</div>
+                        <h3>المحور الثالث: أهمية الاستهلاك المسؤول</h3>
+                        <p>التوازن البيئي والاقتصادي والاجتماعي</p>
+                    </div>
+                    <div class="card" style="border-color: #f97316; background: rgba(249, 115, 22, 0.1);">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">🛠️</div>
+                        <h3>المحور الرابع: سبل التطبيق</h3>
+                        <p>تطبيق الاستهلاك المسؤول في الحياة اليومية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 6: التطبيقات -->
+        <div class="slide">
+            <h2>كيف نطبق الاستهلاك المسؤول؟ 🛠️</h2>
+            <div class="content">
+                <div class="grid-2">
+                    <div>
+                        <div class="feature-list">
+                            <li style="border-color: #22c55e;">
+                                <span class="icon">🍽️</span>
+                                <div>
+                                    <strong style="color: #22c55e;">في مجال الغذاء:</strong><br>
+                                    شراء حسب الحاجة - تجنب الهدر - اختيار الأغذية الصحية
+                                </div>
+                            </li>
+                            <li style="border-color: #3b82f6;">
+                                <span class="icon">💧</span>
+                                <div>
+                                    <strong style="color: #3b82f6;">المياه والطاقة:</strong><br>
+                                    إغلاق الصنابير - الأجهزة الموفرة - الإضاءة الطبيعية
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="feature-list">
+                            <li style="border-color: #a855f7;">
+                                <span class="icon">♻️</span>
+                                <div>
+                                    <strong style="color: #a855f7;">النفايات والمنتجات:</strong><br>
+                                    تقليل البلاستيك - إعادة الاستخدام - فرز النفايات
+                                </div>
+                            </li>
+                            <li style="border-color: #f97316;">
+                                <span class="icon">🛒</span>
+                                <div>
+                                    <strong style="color: #f97316;">الشراء والاستهلاك:</strong><br>
+                                    منتجات عالية الجودة - دعم المحلي - البعد عن العشوائية
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 7: الإحصائيات -->
+        <div class="slide">
+            <h2>نتائج الاستبيان 📈</h2>
+            <div class="content">
+                <div class="grid-2" style="align-items: center;">
+                    <div style="text-align: center;">
+                        <h3 style="margin-bottom: 30px; color: rgba(255,255,255,0.8);">هل سمعت بمفهوم الاستهلاك المسؤول؟</h3>
+                        <div class="circle-chart">
+                            <svg width="200" height="200" viewBox="0 0 200 200">
+                                <circle class="circle-bg" cx="100" cy="100" r="90"/>
+                                <circle class="circle-progress" cx="100" cy="100" r="90" 
+                                        stroke-dasharray="565.48" stroke-dashoffset="79.17" id="circle1"/>
+                            </svg>
+                            <div class="circle-text">86%</div>
+                        </div>
+                        <p style="color: #22c55e; margin-top: 15px; font-size: 1.2rem;">نعم</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <h3 style="margin-bottom: 30px; color: rgba(255,255,255,0.8);">تقييم المعرفة بالأساليب</h3>
+                        <div style="space-y: 20px;">
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>جيدة جداً</span>
+                                    <span style="color: #22c55e; font-weight: bold;">71%</span>
+                                </div>
+                                <div style="height: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden;">
+                                    <div style="width: 71%; height: 100%; background: linear-gradient(90deg, #22c55e, #10b981); border-radius: 10px;"></div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>جيدة</span>
+                                    <span style="color: #10b981; font-weight: bold;">14%</span>
+                                </div>
+                                <div style="height: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden;">
+                                    <div style="width: 14%; height: 100%; background: linear-gradient(90deg, #10b981, #14b8a6); border-radius: 10px;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>ضعيفة</span>
+                                    <span style="color: #14b8a6; font-weight: bold;">14%</span>
+                                </div>
+                                <div style="height: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden;">
+                                    <div style="width: 14%; height: 100%; background: linear-gradient(90deg, #14b8a6, #06b6d4); border-radius: 10px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 8: الأهداف -->
+        <div class="slide">
+            <h2>أهداف البحث 🎯</h2>
+            <div class="content">
+                <div class="grid-2">
+                    <div class="feature-list">
+                        <li><span class="icon">🎯</span> التعرف على مفهوم الاستهلاك المسؤول وأبعاده</li>
+                        <li><span class="icon">🌍</span> توضيح أهمية المحافظة على الموارد الطبيعية</li>
+                        <li><span class="icon">🌱</span> إبراز دور الاستهلاك المسؤول في التنمية المستدامة</li>
+                        <li><span class="icon">⚠️</span> بيان أثر أنماط الاستهلاك غير الرشيدة</li>
+                    </div>
+                    <div class="feature-list">
+                        <li><span class="icon">📋</span> التعرف على الممارسات اليومية للاستهلاك المسؤول</li>
+                        <li><span class="icon">📢</span> نشر الوعي بأهمية ترشيد استهلاك الموارد</li>
+                        <li><span class="icon">✅</span> تعزيز السلوك الاستهلاكي الإيجابي القائم على الاعتدال</li>
+                        <li><span class="icon">💡</span> تقديم مقترحات لترسيخ ثقافة الاستهلاك المسؤول</li>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 9: الخاتمة -->
+        <div class="slide">
+            <h2 style="font-size: 4rem;">الخاتمة 🌟</h2>
+            <div class="content">
+                <p class="big-text" style="margin-bottom: 40px;">
+                    الاستهلاك المسؤول يمثل <span class="highlight">ركيزة أساسية</span> لتحقيق التنمية المستدامة،
+                   
+                 بدوره الفاعل في المحافظة على الموارد الطبيعية والحد من التلوث البيئي.
+               وفي ختام هذا المشروع، لا نراه مجرد واجب دراسي عابر، بل ثمرة رحلةٍ مليئة بالذكريات والاجتهاد والعمل. فقد عشنا خلال هذه المرحلة لحظاتٍ لا تُنسى، جمعت بين السعي والتعب، وبين التعاون والطموح، حتى خرج هذا العمل بصورته النهائية.
+
+كما لا يمكن أن نغفل دور معلماتنا الكرام، اللواتي كنّ لنا عونًا بعد الله، قدّمن الدعم والتوجيه، وغرسن فينا روح الاجتهاد والمثابرة، فلهن منا كل الشكر والتقدير على ما بذلنه من جهدٍ كان له الأثر الكبير في نجاحنا.
+
+ومع اقتراب نهاية رحلتنا في المرحلة الثانوية، تبقى هذه الأيام محفورة في الذاكرة بما فيها من مواقف جميلة وصداقات وتجارب ستظل معنا دائمًا. ونمضي اليوم نحو بداية جديدة، نحمل فيها ما تعلمناه من قيمٍ وخبرات لتكون لنا زادًا في مستقبلنا القادم.
+
+ونسأل الله أن يوفقنا في خطواتنا القادمة، وأن يجعل ما تعلمناه نورًا يرافقنا في دروب الحياة، وأن يكتب لنا النجاح والتوفيق دائمًا.
+
+وإن كانت هذه نهاية مرحلة، فهي بداية أحلامٍ أكبر، سنمضي نحوها بقلوبٍ ممتلئة بالأمل، وذكرياتٍ لا تُنسى.
+
+كنا معكم الطالبات 
+ندى زياد 
+جوري القحطاني 
+ريتاج العمري 
+لمى المطيري
+                </p>
+
+                
+                <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
+                    <div class="card" style="min-width: 200px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">♻️</div>
+                        <p>تحقيق التوازن بين التنمية والبيئة</p>
+                    </div>
+                    <div class="card" style="min-width: 200px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">🤝</div>
+                        <p>مسؤولية جماعية تتطلب تضافر الجهود</p>
+                    </div>
+                    <div class="card" style="min-width: 200px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">🌿</div>
+                        <p>استدامة الموارد للأجيال الحالية والمستقبلية</p>
+                    </div>
+                </div>
+
+                <div style="padding: 30px; background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(20, 184, 166, 0.2)); border-radius: 20px; border: 2px solid rgba(34, 197, 94, 0.5);">
+                    <p style="font-size: 1.8rem; text-align: center; color: #22c55e; font-weight: bold;">
+                        "ليس مجرد خيار فردي، بل مسؤولية جماعية"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 10: الشكر -->
+        <div class="slide title-slide">
+            <div class="content">
+                <div class="pulse" style="font-size: 6rem; margin-bottom: 30px;">🌟</div>
+                <h1 style="font-size: 5rem;">شكراً لحسن الاستماع</h1>
+                
+                <div class="grid-3" style="margin-top: 50px; width: 100%;">
+                    <div class="card">
+                        <h3 style="color: #22c55e; margin-bottom: 10px;">إعداد الطالبات</h3>
+                        <p>لمى المطيري<br>ريتاج العمري<br>جوري القحطاني<br>ندى العتمي</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: #22c55e; margin-bottom: 10px;">إشراف المعلمة</h3>
+                        <p style="font-size: 1.3rem; margin-top: 20px;">وفاء عمران</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: #22c55e; margin-bottom: 10px;">المدرسة</h3>
+                        <p style="font-size: 1.3rem; margin-top: 20px;">الثانوية الأولى بالنرجس</p>
+                        <p style="color: rgba(255,255,255,0.6); margin-top: 10px;">الفصل الدراسي الثاني 1447هـ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // متغيرات عامة
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // تهيئة شريط التقدم
+        function initProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'progress-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToSlide(i);
+                progressBar.appendChild(dot);
+            }
+            document.getElementById('totalSlides').textContent = totalSlides;
+        }
+
+        // تغيير الشريحة
+        function changeSlide(direction) {
+            const newIndex = currentSlideIndex + direction;
+            if (newIndex >= 0 && newIndex < totalSlides) {
+                goToSlide(newIndex);
+            }
+        }
+
+        // الانتقال لشريحة محددة
+        function goToSlide(index) {
+            slides[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = index;
+            slides[currentSlideIndex].classList.add('active');
+            
+            // تحديث العداد
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            
+            // تحديث شريط التقدم
+            document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlideIndex);
+            });
+
+            // تأثير الدائرة في شريحة الإحصائيات
+            if (currentSlideIndex === 6) {
+                animateCircle();
+            }
+        }
+
+        // تأثير الدائرة المتحركة
+        function animateCircle() {
+            const circle = document.getElementById('circle1');
+            if (circle) {
+                circle.style.strokeDashoffset = 565.48;
+                setTimeout(() => {
+                    circle.style.strokeDashoffset = 79.17;
+                }, 100);
+            }
+        }
+
+        // التحكم بالكيبورد
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+
+        // التحكم باللمس (للموبايل)
+        let touchStartX = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) changeSlide(1);
+                else changeSlide(-1);
+            }
+        });
+
+        // بدء التشغيل
+        initProgressBar();
+    </script>
+</body>
+</html>
